@@ -19,8 +19,8 @@ exports.index = function(req, res){
 	
   var str = "%" + req.query.search + "%";
   var find = ' ';
-  var re = new RegExp(find, 'g');
-  var und = new RegExp('undefined', 'g');
+  var re = new RegExp(find, 'g', 'i');
+  var und = new RegExp('undefined', 'g', 'i');
   str = str.replace(re, '%');
   str = str.replace(und, '');
     
