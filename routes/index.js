@@ -7,10 +7,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Quiz' });
 });
 
-//GET
-router.get('/quices/question', quizControllers.question);
+router.param('quizId', quizControllers.load);
 
-router.get('/quices/answer', quizControllers.answer);
+//GET
+router.get('/quices', quizControllers.index);
+router.get('/quices/:quizId(\\d+)', quizControllers.show);
+router.get('/quices/:quizId(\\d+)/answer', quizControllers.answer);
 
 /* GET credits page. */
 router.get('/author', function(req, res, next) {
