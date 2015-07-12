@@ -4,10 +4,12 @@
 </form>
 
 <br>
-<br>
 
 <table>
 <% var i; for (i=0; i<quices.length;i++) { %>
 	<tr><td><a href="/quices/<%= quices[i].id %>"><%= quices[i].pergunta %></a></td></tr>
 <% } %>
 </table>
+
+<br>
+<a href="/quices/new"><button type="button">Crear pergunta</button</a>
