@@ -1,0 +1,20 @@
+
+<label for="perg" class="rem">Pergunta:</label>
+<input type="text" id="perg" name="quiz[pergunta]" value="<%= quiz.pergunta %>"></input><br><br>
+<label for="resp" class="rem">Resposta:</label>
+<input type="text" id="resp" name="quiz[resposta]" value="<%= quiz.resposta %>"></input><br>
+<br>
+<label for="resp" class="rem">Tematica:</label>
+ <select name="quiz[tematica]"> 
+  <option value="<%= quiz.tematica %>" selected><%= quiz.tematica %></option>
+  <option value="otro">Otro</option>
+  <option value="humanidades">Humanidades</option>
+  <option value="ocio">Ocio</option>
+  <option value="ciencia">Ciencia</option>
+  <option value="tecnologia">Tecnología</option>
+  
+</select>
+<br>
+<br>
+
+<input type="submit" value="Aceptar">

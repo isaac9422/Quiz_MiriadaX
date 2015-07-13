@@ -7,7 +7,15 @@
 
 <table>
 <% var i; for (i=0; i<quices.length;i++) { %>
-	<tr><td><a href="/quices/<%= quices[i].id %>"><%= quices[i].pergunta %></a></td></tr>
+	<tr>
+	  <td><a href="/quices/<%= quices[i].id %>"><%= quices[i].pergunta %>    </a></td>
+	  <td><a href="/quices/<%= quices[i].id %>/edit"><button>Editar</button></a></td>
+	  <td>
+	      <form method="POST" action="quices/<%= quices[i].id %>?_method=delete">
+   	          <button onClick="return confirm('Borrar: <%= quices[i].pergunta %>');">Borrar</button>
+	      </form>
+	  </td>
+	</tr>
 <% } %>
 </table>
 

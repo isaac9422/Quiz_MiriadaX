@@ -1,7 +1,7 @@
-<p>Adicionar pergunta: </p>
+<p>Editar pergunta: </p>
 
 <br>
-<form method="POST" action="/quices/create">
+<form method="POST" action="/quices/<%= quiz.id %>?_method=put">
 <% include _form.ejs %>
 </form>
 <br>

@@ -48,7 +48,7 @@ exports.answer = function(req, res){
 };
 
 exports.new = function(req, res){
-  var quiz = models.Quiz.build({pergunta: "Pergunta", resposta: "Resposta"});
+  var quiz = models.Quiz.build({pergunta: "", resposta: "", tematica: ""});
   res.render('quices/new', {quiz: quiz, errors: []});
 };
 
@@ -58,7 +58,35 @@ exports.create = function(req, res){
   	if(err){
   		res.render('quices/new', {quiz: quiz, errors: err.errors});	
   	}else{
-	  quiz.save({fields: ["pergunta", "resposta"]}).then(function(){res.redirect('/quices');})
+	  quiz.save({fields: ["pergunta", "resposta", "tematica"]}).then(function(){res.redirect('/quices');})
   	}
   });
+};
+
+exports.edit = function(req, res){
+  var quiz = req.quiz;
+  res.render('quices/edit', {quiz: quiz, errors: []});
+};
+
+exports.update = function(req, res){
+  req.quiz.pergunta = req.body.quiz.pergunta;
+  req.quiz.resposta = req.body.quiz.resposta;
+  req.quiz.tematica = req.body.quiz.tematica;
+  
+  req.quiz.validate().then(function (err){
+    if(err){
+      res.render('quices/edit', {quiz: req.quiz, errors: err.errors});
+    }else{
+      req.quiz.save({fields: ["pergunta", "resposta", "tematica"]}).then(function (){
+        res.redirect('/quices');
+      });
+    }
+  }
+  );
+};
+
+exports.destroy = function(req, res){
+   req.quiz.destroy().then(function(){
+      res.redirect('/quices');
+   }).catch(function(err){next(error)});
 };

@@ -15,6 +15,9 @@ router.get('/quices/:quizId(\\d+)', quizControllers.show);
 router.get('/quices/:quizId(\\d+)/answer', quizControllers.answer);
 router.get('/quices/new', quizControllers.new);
 router.post('/quices/create', quizControllers.create);
+router.get('/quices/:quizId(\\d+)/edit', quizControllers.edit);
+router.put('/quices/:quizId(\\d+)', quizControllers.update);
+router.delete('/quices/:quizId(\\d+)', quizControllers.destroy);
 
 /* GET credits page. */
 router.get('/author', function(req, res, next) {
