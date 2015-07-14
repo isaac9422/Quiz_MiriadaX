@@ -2,7 +2,7 @@ var models = require('../models/models.js');
 
 //GET answer
 exports.load = function(req, res, next, quizId){
-  models.Quiz.find({where: {id: Number(quizId)}, include: [{model: models.Comment}]}).then(function(quiz){
+  models.Quiz.findById(quizId).then(function(quiz){
   	if(quiz){
   	  req.quiz = quiz;
   	  next();
@@ -48,19 +48,18 @@ exports.answer = function(req, res){
 };
 
 exports.new = function(req, res){
-  var quiz = models.Quiz.build({pergunta: "", resposta: "", tematica: ""});
-  res.render('quices/new', {quiz: quiz, errors: []});
+  res.render('comments/new', {quizId: req.params.quizId, errors: []});
 };
 
 exports.create = function(req, res){
-  var quiz = models.Quiz.build(req.body.quiz);
-  quiz.validate().then(function(err){
+  var comment = models.Comment.build({texto: req.body.comment.texto, QuizId: req.params.quizId});
+  comment.validate().then(function(err){
   	if(err){
-  		res.render('quices/new', {quiz: quiz, errors: err.errors});	
+  		res.render('comments/new', {comment: comment, quizId: req.params.quizId, errors: err.errors});	
   	}else{
-	  quiz.save({fields: ["pergunta", "resposta", "tematica"]}).then(function(){res.redirect('/quices');})
+	  comment.save().then(function(){res.redirect('/quices/'+req.params.quizId)});
   	}
-  });
+  }).catch(function(err){next(err)});
 };
 
 exports.edit = function(req, res){

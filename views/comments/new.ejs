@@ -1,0 +1,15 @@
+
+<form method="GET" action="/quices/<%= quizId %>">
+<input type="submit" value="Atras">
+</form>
+<br>
+<p>Adicionar comentario </p>
+
+<br>
+<form method="POST" action="/quices/<%= quizId %>/comments">
+  <label for="resp" class="rem">Comentario:</label><br>
+  <input type="text" id="comment" name="comment[texto]" value=""></input><br><br>
+  <input type="submit" value="Aceptar">
+</form>
+
+
