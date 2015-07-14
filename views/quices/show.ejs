@@ -14,7 +14,13 @@ Resposta: <input type="text" name ="resposta">
     
 <p><a href="/quices/<%= quiz.id %>/comments/new"><button>Novo comentario</button></a></p>
 <br>
-<p><strong>Commentarios:</strong></p>
+<p><strong>Comentarios:</strong></p>
 <%for(index in quiz.Comments){%>
-  <p>*  <%= quiz.Comments[index].texto %></p>
+	<%if(quiz.Comments[index].publicado || session.user){%>
+		<p>* <%=quiz.Comments[index].texto%>
+	          <%if(session.user && session.user.username === 'admin' && !quiz.Comments[index].publicado){%>
+		    <a href="/quices/<%= quiz.id %>/comments/<%=quiz.Comments[index].id%>/publish"><button>Publicar</button></a>
+		  <%}%>
+		</p>
+  	<%}%>
 <%}%>

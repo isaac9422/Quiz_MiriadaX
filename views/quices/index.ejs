@@ -9,15 +9,19 @@
 <% var i; for (i=0; i<quices.length;i++) { %>
 	<tr>
 	  <td><a href="/quices/<%= quices[i].id %>"><%= quices[i].pergunta %>    </a></td>
+      <% if (session.user){ %>
 	  <td><a href="/quices/<%= quices[i].id %>/edit"><button>Editar</button></a></td>
 	  <td>
 	      <form method="POST" action="quices/<%= quices[i].id %>?_method=delete">
    	          <button onClick="return confirm('Borrar: <%= quices[i].pergunta %>');">Borrar</button>
 	      </form>
 	  </td>
+      <% } %>
 	</tr>
 <% } %>
 </table>
 
-<br>
+<% if (session.user){ %>
+ <br>
 <a href="/quices/new"><button type="button">Crear pergunta</button</a>
+<% } %>
